@@ -7,9 +7,9 @@ const fileStream = fs.createReadStream(path.join(__dirname, 'text.txt'), {encodi
 
 fileStream.on('data', (chunk) => {
   stdout.write(chunk);
-})
+});
 
 fileStream.on('close', () => {
   process.exit();
-})
+});
 

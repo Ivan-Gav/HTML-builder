@@ -15,30 +15,30 @@ const startFile = async (path) => {
       }
       stdout.write('Ok we have text.txt now!\n');
       resolve();
-    })
-  })
-}
+    });
+  });
+};
 
 const requestData = async () => {
-  stdout.write(`Why don't you enter some data:\n`);
+  stdout.write('Why don\'t you enter some data:\n');
   stdin.on('data', data => {
-      if (data.toString().trim() !== 'exit') {
+    if (data.toString().trim() !== 'exit') {
       fileWriteStream.write(data);
-      stdout.write(`Wanna add something? Type it here (or type 'exit' to quit):\n`);
+      stdout.write('Wanna add something? Type it here (or type \'exit\' to quit):\n');
     } else {
       quit();
-    } 
+    }
 
-  })
-}
+  });
+};
 
 const quit = () => {
   stdout.write('It was nice seeing ya! Bye!\n');
   process.exit();
-}
+};
 
 startFile(filePath)
-  .then(() => requestData())
+  .then(() => requestData());
 
 process.on('SIGINT', () => {
   quit();

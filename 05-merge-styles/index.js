@@ -21,3 +21,5 @@ async function mergeStyles(src, dest) {
 }
 
 mergeStyles(srcFolder, dest);
+
+module.exports = { mergeStyles };
