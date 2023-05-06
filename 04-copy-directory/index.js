@@ -6,11 +6,12 @@ const filesFolderCopy = path.join(__dirname, 'files-copy');
 
 async function copyDir(folder, folderCopy) {
 
-  // check if folderCopy exists and create it if necessary
+  // remove folderCopy if it exists and create it
   try {
-    await fsPromises.access(folderCopy);
+    await fsPromises.rm(folderCopy, { recursive: true });
+    await fsPromises.mkdir(folderCopy, { recursive: true });
   } catch {
-    await fsPromises.mkdir(folderCopy);
+    await fsPromises.mkdir(folderCopy, { recursive: true });
   }
 
   // scan source directory for files
