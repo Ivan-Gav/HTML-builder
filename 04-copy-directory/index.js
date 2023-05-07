@@ -36,6 +36,4 @@ async function copyDir(folder, folderCopy) {
 }
 
 copyDir(filesFolder, filesFolderCopy);
-
-module.exports = { copyDir };
  

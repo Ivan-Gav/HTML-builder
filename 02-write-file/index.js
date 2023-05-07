@@ -1,11 +1,10 @@
 const path = require('path');
 const fs = require('fs');
 
-const { stdin, stdout } = process;
+const { stdin, stdout, exit } = process;
 
 const filePath = path.join(__dirname, 'text.txt');
 const fileWriteStream = fs.createWriteStream(filePath, { encoding: 'utf-8' });
-
 
 const startFile = async (path) => {
   return new Promise((resolve, reject) => {
@@ -28,13 +27,12 @@ const requestData = async () => {
     } else {
       quit();
     }
-
   });
 };
 
 const quit = () => {
   stdout.write('It was nice seeing ya! Bye!\n');
-  process.exit();
+  exit();
 };
 
 startFile(filePath)
