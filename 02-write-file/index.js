@@ -4,7 +4,6 @@ const fs = require('fs');
 const { stdin, stdout, exit } = process;
 
 const filePath = path.join(__dirname, 'text.txt');
-const fileWriteStream = fs.createWriteStream(filePath, { encoding: 'utf-8' });
 
 const startFile = async (path) => {
   return new Promise((resolve, reject) => {
@@ -18,11 +17,13 @@ const startFile = async (path) => {
   });
 };
 
-const requestData = async () => {
+const requestData = async (path) => {
   stdout.write('Why don\'t you enter some data:\n');
   stdin.on('data', data => {
     if (data.toString().trim() !== 'exit') {
-      fileWriteStream.write(data);
+      fs.appendFile(path, data.toString(), (err) => {
+        if (err) throw err;
+      });
       stdout.write('Wanna add something? Type it here (or type \'exit\' to quit):\n');
     } else {
       quit();
@@ -36,7 +37,7 @@ const quit = () => {
 };
 
 startFile(filePath)
-  .then(() => requestData());
+  .then(() => requestData(filePath));
 
 process.on('SIGINT', () => {
   quit();
